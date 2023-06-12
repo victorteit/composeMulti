@@ -165,7 +165,8 @@ class Canada : Country("Canada", "Ottawa", 37) {
 
 fun App() {
     AppTheme {
-        Banner("Jane")
+       // Banner("Jane")
+        WellnessScreen()
     }
 }
 @OptIn(ExperimentalResourceApi::class)
