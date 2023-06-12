@@ -1,6 +1,8 @@
 @file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterialApi::class)
 package ui.theme
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,17 +15,22 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Shapes
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -161,8 +168,9 @@ fun App() {
         Banner("Jane")
     }
 }
+@OptIn(ExperimentalResourceApi::class)
 @Composable
-fun Banner(name: String){
+fun Banner(name: String) {
     val text = rememberSaveable { mutableStateOf("") }
     TextField(
         value = text.value,
@@ -171,190 +179,63 @@ fun Banner(name: String){
 
         textStyle = TextStyle(textAlign = TextAlign.Center),
 
-        label = { Text(text = "Please enter your name")}
+        label = { Text(text = "Please enter your name") }
 
     )
     Scaffold(
         topBar = { TopAppBar(title = { Text("VICTOR") }) },
         bottomBar = { BottomAppBar { Text("Copyright (c) 2023 CoolEntertainment, Inc.") } },
-        floatingActionButton = { FloatingActionButton(onClick = {}) { Text("Click Me")} }
+        floatingActionButton = { FloatingActionButton(onClick = {}) { Text("Click Me") } }
     ) {
-       Text ("android")
+        Text("android")
     }
+    MaterialTheme {
+        var greetingText by remember { mutableStateOf(greeting("Victor", 37)) }
+        var showImage by remember { mutableStateOf(false) }
+        makeMap()
+        rangeTest()
+        rangeValue()
+        dayToday()
+        calculating()
+        geography()
+        val canada = Canada()
+        canada.about()
 
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = {
+                greetingText = "Hello "
+                showImage = !showImage
+            }) {
+                Text(greetingText)
+            }
+            AnimatedVisibility(showImage) {
+                Image(
+                    painterResource("compose-multiplatform.xml"),
+                    null
+                )
+            }
+        }
 
+        Column(
+            modifier = Modifier.padding(24.dp).fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row {
+                Text("Hello $name")
+                Spacer(modifier = Modifier.height(20.dp).width(20.dp))
+                Text("Welcome to my app")
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Row {
+                Text("Hello $name")
+                Spacer(modifier = Modifier.height(20.dp).width(20.dp))
+                Text("Welcome to my app")
+
+            }
+        }
+    }
 }
-//    MaterialTheme {
-//        var greetingText by remember { mutableStateOf(greeting("Victor", 37)) }
-//        var showImage by remember { mutableStateOf(false) }
-//        makeMap()
-//        rangeTest()
-//        rangeValue()
-//        dayToday()
-//        calculating()
-//        geography()
-//        val canada = Canada()
-//        canada.about()
-//
-//
-//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-//            Button(onClick = {
-//                greetingText = "Hello, ${getPlatformName()}"
-//                showImage = !showImage
-//            }) {
-//                Text(greetingText)
-//            }
-//            AnimatedVisibility(showImage) {
-//                Image(
-//                    painterResource("compose-multiplatform.xml"),
-//                    null
-//                )
-//            }
-//        }
-//    }
 
-//@OptIn(ExperimentalResourceApi::class, ExperimentalComposeUiApi::class)
-//@Composable
-//fun Banner() {
-//    Column(Modifier.fillMaxSize()) {
-//        Image(
-//            painterResource("bg_compose_background.png"),
-//            contentDescription = "Image",
-//            modifier = Modifier.fillMaxWidth()
-//        )
-//        Spacer(modifier = Modifier.height(16.dp))
-//        Column {
-//            Text(
-//                text = "Jetpack Compose tutorial",
-//                fontSize = 24.sp,
-//                lineHeight = 18.sp,
-//                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 16.dp)
-//            )
-//            Spacer(modifier = Modifier.height(16.dp))
-//            Text(
-//                text = "Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.",
-//                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-//                lineHeight = 18.sp,
-//                textAlign = TextAlign.Justify
-//            )
-//            Spacer(modifier = Modifier.height(16.dp))
-//            Text(
-//                text = "In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.",
-//                modifier = Modifier.padding(
-//                    start = 16.dp,
-//                    end = 16.dp,
-//                    bottom = 16.dp,
-//                    top = 16.dp
-//                ),
-//                lineHeight = 18.sp,
-//                textAlign = TextAlign.Justify
-//            )
-//        }
-//    }
-//}
-//expect fun getPlatformName(): String
-//
-//    Column(modifier=Modifier.padding(24.dp).fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally) {
-//        Row {
-//            Text("Hello $name")
-//            Spacer(modifier = Modifier.height(20.dp).width(20.dp))
-//            Text("Welcome to my app")
-//        }
-//        Spacer(modifier = Modifier.height(20.dp))
-//        Row {
-//            Text("Hello $name")
-//            Spacer(modifier = Modifier.height(20.dp).width(20.dp))
-//            Text("Welcome to my app")
-//
-//        }
-//    }
-
-//@OptIn(ExperimentalResourceApi::class, ExperimentalComposeUiApi::class)
-//@Composable
-//fun Banner(){
-//    Box(
-//        modifier = Modifier.fillMaxSize(),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Column(
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//                Image(
-//                    painterResource("ic_task_completed.png"),
-//                    contentDescription = "Image",
-//                    modifier = Modifier.fillMaxWidth()
-//                )
-//
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            Column(
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                Text(
-//                    text = "All tasks completed",
-//                    fontSize = 24.sp,
-//                    fontWeight = FontWeight.Bold,
-//                    modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
-//                )
-//
-//                Spacer(modifier = Modifier.height(16.dp))
-//
-//                Text(
-//                    text = "Nice work!",
-//                    fontSize = 16.sp
-//                )
-//            }
-//        }
-//    }
-//}
-//expect fun getPlatformName(): String
-
-//@OptIn(ExperimentalResourceApi::class, ExperimentalComposeUiApi::class)
-//@Composable
-//fun Banner() {
-//    val modifier = Modifier
-//        .padding(16.dp)
-//        .fillMaxSize()
-//
-//    Column(Modifier.fillMaxSize()) {
-//        Row(Modifier.weight(1f)) {
-//            QuadrantCard(modifier, Color(0xFFEADDFF), "First Quadrant", "First Text")
-//            QuadrantCard(modifier, Color(0xFFD0BCFF), "Second Quadrant", "Second Text")
-//        }
-//        Row(Modifier.weight(1f)) {
-//            QuadrantCard(modifier, Color(0xFFB69DF8), "Third Quadrant", "Third Text")
-//            QuadrantCard(modifier, Color(0xFFF6EDFF), "Fourth Quadrant", "Fourth Text")
-//        }
-//    }
-//}
-//
-//@Composable
-//fun QuadrantCard(modifier: Modifier, color: Color, title: String, content: String) {
-//    Card(
-//        modifier = modifier,
-//        backgroundColor = color,
-//        elevation = 4.dp
-//    ) {
-//        Box(
-//            contentAlignment = Alignment.Center,
-//            modifier = Modifier.fillMaxSize()
-//        ) {
-//            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                Text(
-//                    text = title,
-//                    fontSize = 16.sp,
-//                    fontWeight = FontWeight.Bold,
-//                    modifier = Modifier.padding(bottom = 16.dp)
-//                )
-//                Text(
-//                    text = content,
-//                    fontSize = 14.sp
-//                )
-//            }
-//        }
-//    }
-//}
 
 //expect fun getPlatformName(): String
