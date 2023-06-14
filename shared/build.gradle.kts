@@ -74,3 +74,6 @@ android {
         jvmToolchain(11)
     }
 }
+dependencies {
+    implementation("androidx.navigation:navigation-runtime-ktx:2.5.3")
+}

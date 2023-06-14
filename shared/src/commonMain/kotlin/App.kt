@@ -50,6 +50,39 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.resource
 
+
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+
+fun App() {
+  AppTheme {
+
+      
+  }
+        // Banner("Jane")
+        //WellnessScreen()
+//        val navController = rememberNavController()
+//    NavigationComposeTheme1{
+//        NavHost(navController = navController, startDestination = "screen_1" ){
+//            composable("screen_1"){
+//                Screen1 { navController.navigate("screen_2") }
+//            }
+//            composable("screen_2"){
+//                Screen2 { navController.navigate("screen_3")}
+//            }
+//            composable("screen_3"){
+//                Screen3 {  navController.navigate("screen_1")}
+//            }
+//        }
+//    }
+}
+
+@Composable
+fun NavigationComposeTheme(function: () -> Unit) {
+
+}
+
 fun greeting(name: String, age: Int): String {
     var message = "Hello $name, you are now $age old"
     println(message)
@@ -160,15 +193,7 @@ class Canada : Country("Canada", "Ottawa", 37) {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
-@Composable
 
-fun App() {
-    AppTheme {
-       // Banner("Jane")
-        WellnessScreen()
-    }
-}
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun Banner(name: String) {
